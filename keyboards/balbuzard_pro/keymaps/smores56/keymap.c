@@ -1,11 +1,24 @@
 #include QMK_KEYBOARD_H
 
+enum combos {
+  UK_Q,
+  KJ_Z,
+};
+
+const uint16_t PROGMEM q_combo[] = {KC_U, KC_K, COMBO_END};
+const uint16_t PROGMEM z_combo[] = {KC_K, KC_J, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [UK_Q] = COMBO(q_combo, KC_Q),
+  [KJ_Z] = COMBO(z_combo, KC_Z)
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        KC_W  KC_C,         KC_G,            KC_M,         KC_TAB,  KC_QUOTE, KC_U,         KC_K,         KC_J,         KC_SCOLON,
-        KC_R, LALT_T(KC_S), LCTL_T(KC_N),    LGUI_T(KC_H), KC_F,    KC_Y,     RGUI_T(KC_I), RCTL_T(KC_E), RALT_T(KC_O), KC_A,
+        KC_W, KC_C,         KC_G,            KC_M,         KC_TAB,  KC_QUOTE, KC_U,         KC_K,         KC_J,         KC_SCOLON,
+        KC_R, LALT_T(KC_S), LCTL_T(KC_T),    LGUI_T(KC_H), KC_F,    KC_Y,     RGUI_T(KC_I), RCTL_T(KC_E), RALT_T(KC_O), KC_A,
         KC_X, KC_B,         KC_L,            KC_D,         KC_V,    KC_MINUS, KC_P,         KC_COMM,      KC_DOT,       KC_SLSH,
-              KC_BTN1,      LT(2, KC_SPACE), KC_LSFT,      KC_BTN2, KC_ENTER, KC_BSPC,      LT(1, KC_T),  KC_ESCAPE
+              KC_BTN1,      LT(2, KC_SPACE), KC_LSFT,      KC_BTN2, KC_ENTER, KC_BSPC,      LT(1, KC_N),  KC_ESCAPE
     ),
 
     [1] = LAYOUT(
@@ -17,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [2] = LAYOUT(
         LSFT(KC_6), LSFT(KC_1), KC_LBRC,       KC_RBRC,       LSFT(KC_GRV), KC_TRNS,    KC_WBAK,   KC_WFWD, KC_TRNS, KC_TRNS,
-        LSFT(KC_4), LSFT(KC_3), LSFT(KC_9),    LSFT(KC_0),    LSFT(KC_2),   KC_PSCREEN, KC_MPRV,   KC_VOLD, KC_VOLU, KC_MKXT,
+        LSFT(KC_4), LSFT(KC_3), LSFT(KC_9),    LSFT(KC_0),    LSFT(KC_2),   KC_PSCREEN, KC_MPRV,   KC_VOLD, KC_VOLU, KC_MNXT,
         LSFT(KC_7), LSFT(KC_5), LSFT(KC_LBRC), LSFT(KC_RBRC), LSFT(KC_8),   KC_TRNS,    KC_MPLY,   KC_MSTP, KC_MUTE, KC_TRNS,
                     KC_TRNS,    KC_NO,         KC_TRNS,       KC_TRNS,      KC_TRNS,    KC_DELETE, KC_TRNS, KC_TRNS
     ),
@@ -36,7 +49,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     ),
 };
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    return true;
-}
